@@ -6,7 +6,7 @@ const {
     replace,
     edit,
     del,
-} = require("@/controllers/comments.controller");
+} = require("@/controllers/comment.controller");
 const express = require("express");
 const router = express.Router();
 router.get("/", getAll);
