@@ -1,5 +1,5 @@
 require("module-alias/register");
-const { loadDB, setDB } = require("@/utils/jsonDB.js");
+const { loadDB, setDB } = require("../../utils/jsonDB.js");
 let db = {};
 function findIdMax(str) {
     if (!db[str] || db[str].length === 0) {
@@ -52,7 +52,7 @@ const postsModel = {
     },
     del(id) {
         const post = db.posts.find((_post) => _post.id === id);
-        const posts = db.posts.find((_post) => _post.id !== id);
+        const posts = db.posts.filter((_post) => _post.id !== id);
         db.posts = posts;
         setDB(db);
         return post;

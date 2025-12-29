@@ -1,7 +1,7 @@
 require("module-alias/register");
 const express = require("express");
 var cors = require("cors");
-const appRoute = require("@/routers");
+const appRoute = require("@/routes");
 const app = express();
 const port = 3000;
 const allowedOrigins = [

@@ -19,7 +19,7 @@ const create = (req, res) => {
     const data = {
         title: req.body.title,
         content: req.body.content,
-        createAt: req.body.createAt,
+        createdAt: req.body.createdAt,
     };
     const post = postsModel.create(data);
     if (!post) {
@@ -37,7 +37,7 @@ const replace = (req, res) => {
     const data = {
         title: req.body.title,
         content: req.body.content,
-        createAt: req.body.createAt,
+        createdAt: req.body.createdAt,
     };
     const post = postsModel.replace(id, data);
     if (!post) {
@@ -55,7 +55,7 @@ const edit = (req, res) => {
     const data = {
         title: req.body.title,
         content: req.body.content,
-        createAt: req.body.createAt,
+        createdAt: req.body.createdAt,
     };
     const post = postsModel.edit(id, data);
     if (!post) {

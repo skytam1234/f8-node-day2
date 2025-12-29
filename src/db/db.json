@@ -5,6 +5,12 @@
       "title": "Bai 1",
       "content": "Nội dung bài 1",
       "createdAt": "2025-11-11"
+    },
+    {
+      "title": "bài 2",
+      "content": "Nội dung bài 2",
+      "createdAt": "2025-11-2",
+      "id": 2
     }
   ],
   "comments": [
