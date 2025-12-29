@@ -1,5 +1,5 @@
 require("module-alias/register");
-const commentsModel = require("@/models/comments.model");
+const commentsModel = require("@/models/comment.model");
 const getAll = (req, res) => {
     const comments = commentsModel.getAll();
     res.status(200).json({ data: comments });

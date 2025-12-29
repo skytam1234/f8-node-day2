@@ -1,5 +1,5 @@
 require("module-alias/register");
-const postsModel = require("@/models/posts.model");
+const postsModel = require("@/models/post.model");
 const getAll = (req, res) => {
     const posts = postsModel.getAll();
     res.status(200).json({ data: posts });
