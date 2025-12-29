@@ -1,0 +1,23 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "Bai 1",
+      "content": "Nội dung bài 1",
+      "createdAt": "2025-11-11"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "postId": 1,
+      "content": "Nội dung bài 1",
+      "createdAt": "2025-11-11"
+    },
+    {
+      "postId": 1,
+      "content": "Nội dung bài 2",
+      "id": 2
+    }
+  ]
+}
