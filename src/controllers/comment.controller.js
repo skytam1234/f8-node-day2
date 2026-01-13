@@ -19,7 +19,7 @@ const create = (req, res) => {
     const data = {
         postId: req.body.postId,
         content: req.body.content,
-        createdAt: req.body.createdAt,
+        createdAt: new Date().toISOString(),
     };
     const comment = commentsModel.create(data);
     if (!comment) {
@@ -37,7 +37,6 @@ const replace = (req, res) => {
     const data = {
         postId: req.body.postId,
         content: req.body.content,
-        createdAt: req.body.createdAt,
     };
     const comment = commentsModel.replace(id, data);
     if (!comment) {
@@ -50,24 +49,7 @@ const replace = (req, res) => {
         data: comment,
     });
 };
-const edit = (req, res) => {
-    const id = +req.params.id;
-    const data = {
-        postId: req.body.postId,
-        content: req.body.content,
-        createdAt: req.body.createdAt,
-    };
-    const comment = commentsModel.edit(id, data);
-    if (!comment) {
-        return res.status(404).json({
-            status: 404,
-            message: "404 Not Found",
-        });
-    }
-    res.json({
-        data: comment,
-    });
-};
+
 const del = (req, res) => {
     const id = +req.params.id;
     const comment = commentsModel.del(id);
@@ -77,8 +59,6 @@ const del = (req, res) => {
             message: "404 Not Found",
         });
     }
-    res.status(204).json({
-        data: comment,
-    });
+    res.status(204).send();
 };
-module.exports = { getAll, getOne, create, replace, edit, del };
+module.exports = { getAll, getOne, create, replace, del };

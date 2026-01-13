@@ -1,6 +1,6 @@
 require("module-alias/register");
 const { loadDB, setDB } = require("../../utils/jsonDB.js");
-let db = {};
+let db = {posts: []};
 function findIdMax(str) {
     if (!db[str] || db[str].length === 0) {
         return 1;
@@ -11,10 +11,12 @@ function findIdMax(str) {
     });
     return max + 1;
 }
-loadDB().then((respond) => (db = respond));
+(async () => {
+    db = await loadDB("posts");
+})();
 const postsModel = {
     getAll() {
-        return db.posts;
+        return db.posts || [];
     },
     getOne(id) {
         const post = db.posts.find((_post) => _post.id === id);
@@ -22,39 +24,30 @@ const postsModel = {
     },
     create(data) {
         const newPost = {
-            ...data,
+            title: data.title,
+            content: data.content,
+            createdAt: data.createdAt,
             id: findIdMax("posts"),
         };
         db.posts.push(newPost);
-        setDB(db);
+        setDB("posts", db);
         return newPost;
     },
     replace(id, data) {
         const post = db.posts.find((_post) => _post.id === id);
         if (!post) return null;
-        const { title, content, createdAt } = data;
-        if (!title || !content || !createdAt) return null;
+        const { title, content } = data;
+        if (!title || !content) return null;
         post.title = title;
         post.content = content;
-        post.createdAt = createdAt;
-        setDB(db);
-        return post;
-    },
-    edit(id, data) {
-        const post = db.posts.find((_post) => _post.id === id);
-        if (!post) return null;
-        const { title, content, createdAt } = data;
-        if (title) post.title = title;
-        if (content) post.content = content;
-        if (createdAt) post.createdAt = createdAt;
-        setDB(db);
+        setDB("posts", db);
         return post;
     },
     del(id) {
         const post = db.posts.find((_post) => _post.id === id);
         const posts = db.posts.filter((_post) => _post.id !== id);
         db.posts = posts;
-        setDB(db);
+        setDB("posts", db);
         return post;
     },
 };

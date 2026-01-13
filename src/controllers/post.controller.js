@@ -19,7 +19,7 @@ const create = (req, res) => {
     const data = {
         title: req.body.title,
         content: req.body.content,
-        createdAt: req.body.createdAt,
+        createdAt: new Date().toISOString(),
     };
     const post = postsModel.create(data);
     if (!post) {
@@ -37,7 +37,6 @@ const replace = (req, res) => {
     const data = {
         title: req.body.title,
         content: req.body.content,
-        createdAt: req.body.createdAt,
     };
     const post = postsModel.replace(id, data);
     if (!post) {
@@ -50,24 +49,7 @@ const replace = (req, res) => {
         data: post,
     });
 };
-const edit = (req, res) => {
-    const id = +req.params.id;
-    const data = {
-        title: req.body.title,
-        content: req.body.content,
-        createdAt: req.body.createdAt,
-    };
-    const post = postsModel.edit(id, data);
-    if (!post) {
-        return res.status(404).json({
-            status: 404,
-            message: "404 Not Found",
-        });
-    }
-    res.json({
-        data: post,
-    });
-};
+
 const del = (req, res) => {
     const id = +req.params.id;
     const post = postsModel.del(id);
@@ -77,8 +59,6 @@ const del = (req, res) => {
             message: "404 Not Found",
         });
     }
-    res.status(204).json({
-        data: post,
-    });
+    res.status(204).send();
 };
-module.exports = { getAll, getOne, create, replace, edit, del };
+module.exports = { getAll, getOne, create, replace, del };
